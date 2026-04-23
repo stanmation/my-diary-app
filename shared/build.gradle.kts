@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.2"
 }
 
 kotlin {
@@ -31,9 +32,18 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
+            implementation("com.rickclephas.kmp:kmp-nativecoroutines-core:1.0.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        sourceSets {
+            val commonMain by getting {
+                dependencies {
+                    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+                }
+            }
         }
     }
 }

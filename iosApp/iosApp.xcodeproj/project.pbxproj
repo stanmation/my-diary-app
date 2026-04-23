@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6081FD662F90FE9800E9506D /* SharedGui.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6081FD652F90FE9800E9506D /* SharedGui.xcframework */; };
-		6081FD672F90FE9800E9506D /* SharedGui.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6081FD652F90FE9800E9506D /* SharedGui.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		600FB9192F9790BA00940C05 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 600FB9182F9790BA00940C05 /* KMPNativeCoroutinesAsync */; };
+		600FB91B2F9790BA00940C05 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 600FB91A2F9790BA00940C05 /* KMPNativeCoroutinesCombine */; };
+		600FB91D2F9790BA00940C05 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 600FB91C2F9790BA00940C05 /* KMPNativeCoroutinesCore */; };
+		600FB91F2F9790BA00940C05 /* KMPNativeCoroutinesRxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 600FB91E2F9790BA00940C05 /* KMPNativeCoroutinesRxSwift */; };
+		6081FD722F91012100E9506D /* SharedGui.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6081FD6E2F9100E300E9506D /* SharedGui.xcframework */; };
+		6081FD732F91012100E9506D /* SharedGui.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6081FD6E2F9100E300E9506D /* SharedGui.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6081FD502F90F60800E9506D /* Embed Frameworks */ = {
+		6081FD742F91012100E9506D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6081FD672F90FE9800E9506D /* SharedGui.xcframework in Embed Frameworks */,
+				6081FD732F91012100E9506D /* SharedGui.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -26,8 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6081FD652F90FE9800E9506D /* SharedGui.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SharedGui.xcframework; path = ../shared/build/XCFrameworks/debug/SharedGui.xcframework; sourceTree = "<group>"; };
-		6081FD682F90FED100E9506D /* Shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shared.framework; path = "../shared/build/XCFrameworks/debug/SharedGui.xcframework/ios-arm64/Shared.framework"; sourceTree = SOURCE_ROOT; };
+		6081FD6E2F9100E300E9506D /* SharedGui.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SharedGui.xcframework; path = ../shared/build/XCFrameworks/debug/SharedGui.xcframework; sourceTree = "<group>"; };
 		EE0589DF2729143DF13AA1A9 /* MyDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -62,7 +65,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6081FD662F90FE9800E9506D /* SharedGui.xcframework in Frameworks */,
+				600FB91B2F9790BA00940C05 /* KMPNativeCoroutinesCombine in Frameworks */,
+				600FB9192F9790BA00940C05 /* KMPNativeCoroutinesAsync in Frameworks */,
+				600FB91F2F9790BA00940C05 /* KMPNativeCoroutinesRxSwift in Frameworks */,
+				600FB91D2F9790BA00940C05 /* KMPNativeCoroutinesCore in Frameworks */,
+				6081FD722F91012100E9506D /* SharedGui.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +89,7 @@
 		6081FD642F90FE9700E9506D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6081FD652F90FE9800E9506D /* SharedGui.xcframework */,
-				6081FD682F90FED100E9506D /* Shared.framework */,
+				6081FD6E2F9100E300E9506D /* SharedGui.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,7 +113,7 @@
 				16E0B7707407504C87B61840 /* Sources */,
 				02BC3B68C9CC64FC17DAE37F /* Frameworks */,
 				3A9783C0E82FC0A45C9B9306 /* Resources */,
-				6081FD502F90F60800E9506D /* Embed Frameworks */,
+				6081FD742F91012100E9506D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -118,6 +124,10 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				600FB9182F9790BA00940C05 /* KMPNativeCoroutinesAsync */,
+				600FB91A2F9790BA00940C05 /* KMPNativeCoroutinesCombine */,
+				600FB91C2F9790BA00940C05 /* KMPNativeCoroutinesCore */,
+				600FB91E2F9790BA00940C05 /* KMPNativeCoroutinesRxSwift */,
 			);
 			productName = iosApp;
 			productReference = EE0589DF2729143DF13AA1A9 /* MyDiary.app */;
@@ -147,6 +157,9 @@
 			);
 			mainGroup = 21437FB7A193F86F671BE941;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F94258B5F842311BC40B0ACA /* Products */;
 			projectDirPath = "";
@@ -171,7 +184,7 @@
 		1BD5C7E7C06E6CF04FF1ACCC /* Compile Kotlin Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -183,7 +196,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
@@ -221,7 +234,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -232,7 +245,7 @@
 					Shared,
 				);
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -298,9 +311,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEAM_ID = "";
 			};
 			name = Debug;
 		};
@@ -325,7 +339,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -336,7 +350,7 @@
 					Shared,
 				);
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -382,10 +396,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../shared/build/xcode-frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -399,8 +410,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				TEAM_ID = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -427,6 +439,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		600FB9182F9790BA00940C05 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		600FB91A2F9790BA00940C05 /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		600FB91C2F9790BA00940C05 /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesCore;
+		};
+		600FB91E2F9790BA00940C05 /* KMPNativeCoroutinesRxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 600FB9172F9790BA00940C05 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesRxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A08988F52ED3BF924FEEFD8 /* Project object */;
 }

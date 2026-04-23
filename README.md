@@ -44,4 +44,7 @@ To generate the XCFrameworks for the shared module, run the following command:
 
 ---
 
+### Compile Kotlin Framework in XCode
+Tick "For install builds only" under Target app - Build Phases - Compile Kotlin Framework in order to run iOS project in XCode
+
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
