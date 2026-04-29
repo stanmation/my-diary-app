@@ -39,6 +39,16 @@ class TimelineListViewModel {
     private val _state = MutableStateFlow(TimelineListUiState())
     val state: StateFlow<TimelineListUiState> = _state
 
+    init {
+        _state.value = TimelineListUiState(
+            timelines = listOf(
+                TimelineItem("1", "Japan Trip", 120, Category.TRAVEL),
+                TimelineItem("2", "Gym Progress", 45, Category.FITNESS),
+                TimelineItem("3", "Food Adventures", 80, Category.FOOD)
+            )
+        )
+    }
+
     fun observeState(onEach: (TimelineListUiState) -> Unit) {
         scope.launch {
             state.collect {

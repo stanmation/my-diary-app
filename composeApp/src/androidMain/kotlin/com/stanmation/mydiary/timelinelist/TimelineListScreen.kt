@@ -29,11 +29,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.ui.tooling.preview.Preview
+import com.stanmation.mydiary.viewmodels.TimelineItem
 import com.stanmation.mydiary.viewmodels.TimelineListViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimelineListScreen(viewModel: TimelineListViewModel) {
+fun TimelineListScreen(viewModel: TimelineListViewModel,
+                       onTimelineClick: (TimelineItem) -> Unit) {
     val state by viewModel.state.collectAsState()
 
     Scaffold(
@@ -57,7 +60,7 @@ fun TimelineListScreen(viewModel: TimelineListViewModel) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { /* navigate */ }
+                            .clickable { onTimelineClick(timeline) }
                             .padding(16.dp)
                     ) {
                         Text(timeline.name, style = MaterialTheme.typography.titleMedium)
@@ -110,4 +113,13 @@ fun EmptyState() {
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TimelineListPreview() {
+    TimelineListScreen(
+        viewModel = TimelineListViewModel(),
+        onTimelineClick = {}
+    )
 }
