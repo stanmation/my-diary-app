@@ -5,16 +5,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.time.Clock
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.stanmation.mydiary.models.TimelineItem
+import com.stanmation.mydiary.repositories.TimelineRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-data class TimelineItem(
-    val id: String,
-    val name: String,
-    val photoCount: Int,
-    val category: Category
-)
 
 enum class Category {
     FITNESS, TRAVEL, FOOD;
@@ -33,26 +29,34 @@ data class TimelineListUiState(
     val selectedCategory: Category = Category.FITNESS
 )
 
-class TimelineListViewModel {
+class TimelineListViewModel(
+    private val repository: TimelineRepository
+) {
     private val scope = CoroutineScope(Dispatchers.Main)
 
     private val _state = MutableStateFlow(TimelineListUiState())
     val state: StateFlow<TimelineListUiState> = _state
 
     init {
-        _state.value = TimelineListUiState(
-            timelines = listOf(
-                TimelineItem("1", "Japan Trip", 120, Category.TRAVEL),
-                TimelineItem("2", "Gym Progress", 45, Category.FITNESS),
-                TimelineItem("3", "Food Adventures", 80, Category.FOOD)
-            )
-        )
+//        _state.value = TimelineListUiState(
+//            timelines = listOf(
+//                TimelineItem("1", "Japan Trip", 120, Category.TRAVEL),
+//                TimelineItem("2", "Gym Progress", 45, Category.FITNESS),
+//                TimelineItem("3", "Food Adventures", 80, Category.FOOD)
+//            )
+//        )
     }
 
-    fun observeState(onEach: (TimelineListUiState) -> Unit) {
-        scope.launch {
-            state.collect {
-                onEach(it)
+    init {
+        observeTimelines()
+    }
+
+    private fun observeTimelines() {
+        CoroutineScope(Dispatchers.Main).launch {
+            repository.getTimelines().collect { timelines ->
+                _state.update {
+                    it.copy(timelines = timelines)
+                }
             }
         }
     }

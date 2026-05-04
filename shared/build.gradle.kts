@@ -1,3 +1,4 @@
+import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("com.rickclephas.kmp.nativecoroutines") version "1.0.2"
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -24,7 +26,6 @@ kotlin {
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "Shared"
-//            isStatic = true
             xcf.add(this)
         }
     }
@@ -44,6 +45,14 @@ kotlin {
                     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
                 }
             }
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        register("Database") {
+            packageName.set("com.stanmation.mydiary.database")
         }
     }
 }

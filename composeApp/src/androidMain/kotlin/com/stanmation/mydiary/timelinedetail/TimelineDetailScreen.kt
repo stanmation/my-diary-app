@@ -19,58 +19,85 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import com.stanmation.mydiary.models.PhotoItem
-import com.stanmation.mydiary.utilities.toPhotoItem
+import com.stanmation.mydiary.models.TimelineItem
+import com.stanmation.mydiary.utilities.extractPhotoDate
 import com.stanmation.mydiary.viewmodels.Category
-import com.stanmation.mydiary.viewmodels.TimelineItem
+import androidx.activity.compose.BackHandler
+import com.stanmation.mydiary.viewmodels.TimelineDetailViewModel
 import kotlinx.datetime.*
-
-
-//data class PhotoItem(
-//    val uri: Uri,
-//    val dateMillis: Long
-//)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimelineDetailScreen(
-    timeline: TimelineItem,
+    viewModel: TimelineDetailViewModel,
     onBack: () -> Unit = {}
 ) {
     // -----------------------------
     // STATE (equivalent to @State)
     // -----------------------------
-    val selectedPhotos = remember { mutableStateListOf<PhotoItem>() }
     var tappedPhoto by remember { mutableStateOf<PhotoItem?>(null) }
     var showingDeleteConfirmation by remember { mutableStateOf(false) }
+
+    val state by viewModel.uiState.collectAsState()
+    val timeline = state.timeline ?: return
+
 
     // -----------------------------
     // PHOTO PICKER
     // -----------------------------
+    val context = LocalContext.current
+//    val pickerLauncher = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.PickMultipleVisualMedia(10)
+//    ) { uris ->
+//        uris.forEach { uri ->
+//            val exifDate = uri.extractPhotoDate(context)
+//
+//            selectedPhotos.add(
+//                PhotoItem(
+//                    path = uri.toString(),
+//                    dateMillis = exifDate ?: System.currentTimeMillis()
+//                )
+//            )
+//        }
+//    }
+
     val pickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia(10)
     ) { uris ->
-        val now = Clock.System.now().toEpochMilliseconds()
-        selectedPhotos.addAll(
-            uris.map { it.toPhotoItem() }
-        )
+
+        val newPhotos = uris.map { uri ->
+            val exifDate = uri.extractPhotoDate(context)
+
+            PhotoItem(
+                id = uri.toString(),
+                path = uri.toString(),
+                dateMillis = exifDate ?: System.currentTimeMillis()
+            )
+        }
+
+        viewModel.addPhotos(newPhotos)
     }
 
     // -----------------------------
     // GROUP BY YEAR
     // -----------------------------
-    val grouped = remember(selectedPhotos) {
-        selectedPhotos.groupBy { photo ->
+    val grouped = timeline.photos
+        .sortedByDescending { it.dateMillis }
+        .groupBy { photo ->
             Instant.fromEpochMilliseconds(photo.dateMillis)
                 .toLocalDateTime(TimeZone.currentSystemDefault())
                 .year
-        }.toSortedMap(compareByDescending { it })
-    }
+        }
 
+    BackHandler {
+        onBack()
+    }
 
     Scaffold(
         topBar = {
@@ -78,7 +105,7 @@ fun TimelineDetailScreen(
                 title = { Text(timeline.name) },
                 actions = {
                     IconButton(onClick = {
-                        // TODO save photos
+                       viewModel.savePhotos()
                     }) {
                         Icon(Icons.Default.Done, contentDescription = null)
                     }
@@ -140,7 +167,6 @@ fun TimelineDetailScreen(
             ) {
 
                 grouped.forEach { (year, photos) ->
-
                     item {
                         Text(
                             text = year.toString(),
@@ -160,16 +186,13 @@ fun TimelineDetailScreen(
         }
     }
 
-    // -----------------------------
-    // DELETE CONFIRMATION
-    // -----------------------------
+
     if (showingDeleteConfirmation) {
         AlertDialog(
             onDismissRequest = { showingDeleteConfirmation = false },
             confirmButton = {
                 TextButton(onClick = {
-                    // TODO delete timeline
-                    showingDeleteConfirmation = false
+                    viewModel.deleteTimeline()
                     onBack()
                 }) {
                     Text("Delete")
@@ -208,15 +231,15 @@ fun TimelineDetailScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TimelineDetailPreview() {
-    TimelineDetailScreen(
-        timeline = TimelineItem(
-            id = "1",
-            name = "Japan Trip",
-            photoCount = 10,
-            category = Category.TRAVEL
-        )
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TimelineDetailPreview() {
+//    TimelineDetailScreen(
+//        timeline = TimelineItem(
+//            id = "1",
+//            name = "Japan Trip",
+//            photoCount = 10,
+//            category = Category.TRAVEL
+//        )
+//    )
+//}
