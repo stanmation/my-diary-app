@@ -39,6 +39,12 @@ kotlin {
             implementation(libs.kotlin.test)
         }
 
+        val androidMain by getting {
+            dependencies {
+                implementation("app.cash.sqldelight:android-driver:2.3.2")
+            }
+        }
+
         sourceSets {
             val commonMain by getting {
                 dependencies {
@@ -51,7 +57,7 @@ kotlin {
 
 sqldelight {
     databases {
-        register("Database") {
+        register("DiaryDatabase") {
             packageName.set("com.stanmation.mydiary.database")
         }
     }

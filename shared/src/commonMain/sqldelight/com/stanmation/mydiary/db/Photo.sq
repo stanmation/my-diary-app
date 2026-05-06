@@ -1,0 +1,13 @@
+CREATE TABLE photo (
+    id TEXT PRIMARY KEY NOT NULL,
+    timeline_id TEXT NOT NULL,
+    path TEXT NOT NULL,
+    dateMillis INTEGER NOT NULL
+);
+
+selectByTimeline:
+SELECT * FROM photo WHERE timeline_id = ?;
+
+insert:
+INSERT INTO photo(id, timeline_id, path, dateMillis)
+VALUES (?, ?, ?, ?);

@@ -54,7 +54,6 @@ fun TimelineListScreen(
             )
         }
     ) { padding ->
-
         if (state.timelines.isEmpty()) {
             Box(modifier = Modifier.padding(padding)) {
                 Text("No timelines yet", modifier = Modifier.padding(16.dp))
@@ -68,7 +67,7 @@ fun TimelineListScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                onTimelineClick(timeline) // 👈 THIS WORKS
+                                onTimelineClick(timeline)
                             }
                             .padding(16.dp)
                     ) {
@@ -78,6 +77,16 @@ fun TimelineListScreen(
                 }
             }
         }
+    }
+
+    if (state.isShowingCreate) {
+        CreateTimelineDialog(
+            state = state,
+            onNameChange = viewModel::onNameChanged,
+            onCategoryChange = viewModel::onCategorySelected,
+            onCancel = viewModel::onCancelCreate,
+            onCreate = viewModel::createTimeline
+        )
     }
 }
 

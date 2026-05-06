@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.time.Clock
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.stanmation.mydiary.models.TimelineItem
 import com.stanmation.mydiary.repositories.TimelineRepository
 import kotlinx.coroutines.CoroutineScope
@@ -38,16 +37,6 @@ class TimelineListViewModel(
     val state: StateFlow<TimelineListUiState> = _state
 
     init {
-//        _state.value = TimelineListUiState(
-//            timelines = listOf(
-//                TimelineItem("1", "Japan Trip", 120, Category.TRAVEL),
-//                TimelineItem("2", "Gym Progress", 45, Category.FITNESS),
-//                TimelineItem("3", "Food Adventures", 80, Category.FOOD)
-//            )
-//        )
-    }
-
-    init {
         observeTimelines()
     }
 
@@ -60,6 +49,7 @@ class TimelineListViewModel(
             }
         }
     }
+
     fun onAddClicked() {
         _state.update { it.copy(isShowingCreate = true) }
     }
@@ -94,9 +84,12 @@ class TimelineListViewModel(
             category = current.selectedCategory
         )
 
+        scope.launch {
+            repository.addTimeline(newItem)
+        }
+
         _state.update {
             it.copy(
-                timelines = listOf(newItem) + it.timelines,
                 isShowingCreate = false,
                 newTimelineName = "",
                 selectedCategory = Category.FITNESS

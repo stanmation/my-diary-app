@@ -1,0 +1,15 @@
+CREATE TABLE timeline (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM timeline;
+
+insert:
+INSERT INTO timeline(id, name, category)
+VALUES (?, ?, ?);
+
+deleteById:
+DELETE FROM timeline WHERE id = ?;
