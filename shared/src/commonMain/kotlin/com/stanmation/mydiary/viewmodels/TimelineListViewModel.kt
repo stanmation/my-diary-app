@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 
 enum class Category {
-    FITNESS, TRAVEL, FOOD;
+    FITNESS, TRAVEL, FOOD, WEDDING, PARTNER_VISA;
 
     fun displayName(): String = name.lowercase().replaceFirstChar { it.uppercase() }
 

@@ -48,21 +48,6 @@ class TimelineDetailViewModel(
         scope.launch {
             repository.addPhotos(timelineId, newPhotos)
         }
-//        _draftPhotos.update { it + newPhotos }
-
-    }
-
-    fun savePhotos() {
-        // TODO: will save to persistience
-//        val timeline = _uiState.value.timeline ?: return
-//        scope.launch {
-//            repository.addPhotos(
-//                timelineId = timeline.id,
-//                photos = _draftPhotos.value
-//            )
-//
-//            _draftPhotos.value = emptyList()
-//        }
     }
 
     fun deleteTimeline() {

@@ -3,16 +3,9 @@ package com.stanmation.mydiary.utilities
 import android.content.Context
 import android.media.ExifInterface
 import android.net.Uri
-import com.stanmation.mydiary.models.PhotoItem
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-//fun Uri.toPhotoItem(): PhotoItem {
-//    return PhotoItem(
-//        path = this.toString(),
-//        dateMillis = System.currentTimeMillis()
-//    )
-//}
 
 fun Uri.extractPhotoDate(context: Context): Long? {
     return try {
@@ -26,7 +19,7 @@ fun Uri.extractPhotoDate(context: Context): Long? {
                 formatter.parse(it)?.time
             }
         }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         null
     }
 }
